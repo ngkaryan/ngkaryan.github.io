@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form example 2</title>
+<style>
+input {text-align: right;}
+body {background-color: #f5f5dc;}
+.body { width: 550px; margin: 0px auto;}
+</style>
+<script>
+function process()
+{ 
+var number1, number2, number3, n1, n2, n3, sum, product, average, largest, smallest;
+number1 = document.forms["myform"].elements["num1"].value;
+number2 = document.forms["myform"].elements["num2"].value;
+number3 = document.forms["myform"].elements["num3"].value;
+
+n1 = parseInt(number1);
+n2 = parseInt(number2);
+n3 = parseInt(number3);
+
+sum = n1 + n2 + n3;
+product = n1 * n2 * n3;
+average = sum / 3;
+largest = Math.max(n1,n2,n3);
+smallest = Math.min(n1,n2,n3);
+
+document.forms["myform"].elements["sum_result"].value = sum;
+document.forms["myform"].elements["product_result"].value = product;
+document.forms["myform"].elements["average_result"].value = average;
+document.forms["myform"].elements["largest_result"].value = largest;
+document.forms["myform"].elements["smallest_result"].value = smallest;
+
+}
+</script>
+</head>
+<body>
+
+<form name="myform">
+<table>
+
+<tr>
+<td>First Number:</td> 
+<td><input type="number" name="num1" size="10"></td>
+</tr>
+
+<tr>
+<td>Second Number:</td> 
+<td><input type="number" name="num2" size="10"></td>
+</tr>
+
+<tr>
+<td>Third Number:</td> 
+<td><input type="number" name="num3" size="10"></td>
+</tr>
+
+<tr>
+<td>Sum is:</td> 
+<td><input type="number" name="sum_result" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Product is:</td> 
+<td><input type="number" name="product_result" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Average is:</td> 
+<td><input type="number" name="average_result" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Largest is:</td> 
+<td><input type="number" name="largest_result" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Smallest is:</td> 
+<td><input type="number" name="smallest_result" size="10" readonly></td>
+</tr>
+
+</table>
+<br><br>
+<input type="button" onclick="process()" value="SUBMIT">
+<input type="reset" value="RESET">
+</form>
+
+<p><a class="button" href="hw2.html">back to Home Work 2 cover page</a></p>
+
+</body>
+</html>
