@@ -1,0 +1,79 @@
+<!DOCTYPE html> 
+    <html lang="en">
+	<!-- Source: https://stackoverflow.com/questions/14496531/adding-two-numbers-concatenates-them-instead-of-calculating-the-sum  -->
+
+	<head>
+
+<title>Counting positive, zero, and negative numbers</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function(){
+  				$("button").click(function(){
+					if (this.id == 'fadetoButton') {
+						$("#countsDiv").fadeTo("slow", 0.45);
+					}
+					else if (this.id == 'unfadeButton') {
+						$("#countsDiv").fadeTo("slow", 1);
+					}
+				});
+			});
+		</script>
+	</head>
+
+      <body>
+
+        <p><button id="runButton" onclick="myFunction()">Run it</button>
+	<button id = "fadetoButton">Fade to</button>
+	<button id = "unfadeButton">Unfade</button></p>
+        <br/>
+        <br/>Enter first number:
+        <input type="number" id="txt0" name="text0">
+
+        <br>Enter second number:
+        <input type="number" id="txt1" name="text1">
+
+        <br>Enter third number:
+        <input type="number" id="txt2" name="text2">
+
+        <br>Enter fourth number:
+        <input type="number" id="txt3" name="text3">
+
+        <br>Enter fifth number:
+        <input type="number" id="txt4" name="text4">
+
+	<div id="countsDiv" style="background-color:lightblue">
+        <p id="positiveCount"></p>
+	<p id="zeroCount"></p>
+	<p id="negativeCount"></p>
+	</div>
+
+        <script>
+          function myFunction() {
+		var x = [ 0, 0, 0, 0, 0 ];
+		x[0] = parseInt(document.getElementById("txt0").value);
+		x[1] = parseInt(document.getElementById("txt1").value);
+		x[2] = parseInt(document.getElementById("txt2").value);
+		x[3] = parseInt(document.getElementById("txt3").value);
+		x[4] = parseInt(document.getElementById("txt4").value);
+		var i = 0;
+		var positiveCount = 0;
+		var zeroCount = 0;
+		var negativeCount = 0;
+		for (i = 0; i < 5; i++) { 
+			if (0 > x[i]) {
+				negativeCount++;
+			} else if (0 == x[i]) {
+				zeroCount++;
+			} else {
+				positiveCount++;		
+			}
+	    	}
+		document.getElementById("positiveCount").innerHTML = "number of positive numbers: " + positiveCount;
+		document.getElementById("zeroCount").innerHTML = "number of zeros: " + zeroCount;
+		document.getElementById("negativeCount").innerHTML = "number of negative numbers: " + negativeCount;
+          }
+        </script>
+
+<p><a class="button" href="hw2.html">back to Home Work 2 cover page</a></p>
+      </body>
+    </html>
