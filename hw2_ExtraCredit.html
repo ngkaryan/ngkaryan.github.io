@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<!-- adapted from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_temp_converter_fahrenheit_to_celsius -->
+
+<title>
+Your Full Name: Kar Y Ng
+Your Email kng105@mail.ccsf.edu
+CNIT 133
+Assignment #: 2
+Date: February 2nd 2019
+</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+	$("#exchangeTableHeader").slideToggle("slow");
+	$("#exchangeRowHeader").slideToggle("slow");
+	$("#usdEntry").slideToggle("slow");
+  });
+
+	$('#moneyInUSD').focus(function() {
+		$(this).css('background-color','red');
+	});     // end focus
+
+ 	$('#moneyInUSD').focusout(function() {
+		$(this).css('background-color','white');
+ 	})
+
+}); // end ready
+</script>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-family: Arial, Helvetica, sans-serif;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  display: table-cell;
+  vertical-align: inherit;
+  font-weight: bold;
+  text-align: center;
+}
+td {
+  text-align: right;
+}
+</style>
+
+<body>
+
+<h2>USD to Foreign Money Converter</h2>
+
+<p><span id="moneyInUSDOutput"></span> </p>
+
+<div id="flip">Click to slide the panel down or up</div>
+
+<table>
+
+<tr id="exchangeTableHeader"><td colspan="3" style="text-align: center; vertical-align: middle;"><b>Monetary Exchange Rates</b></td></tr>
+<tr id="exchangeRowHeader"><td style="text-align: center; vertical-align: middle;"><b>Currency</b></td><td style="text-align: center; vertical-align: middle;"><b>Rate</b></td><td style="text-align: center; vertical-align: middle;"><b>Value</b></td></tr>
+
+<tr><td style="text-align: left; vertical-align: middle;">British Pound</td><td>0.77521</td><td>  <span id="moneyInBrit"></span> </td></tr>
+
+<tr><td style="text-align: left; vertical-align: middle;">Canadian Dollar</td><td>0.77521</td><td>  <span id="moneyInCAD"></span> </td></tr>
+
+<tr><td style="text-align: left; vertical-align: middle;">Euro</td><td>1.34461</td><td> <span id="moneyInEuro"></span> </td></tr>
+
+<tr><td style="text-align: left; vertical-align: middle;">Japanese Yen</td><td>0.88754</td><td>  <span id="moneyInYen"></span> </td></tr>
+
+<tr><td style="text-align: left; vertical-align: middle;">Mexican Peso</td><td>109.350</td><td> <span id="moneyInPeso"></span> </td></tr>
+
+<tr id="usdEntry"><td colspan="2"><b>Enter Amount of U.S. Dollars</b></td><td><input id="moneyInUSD" type="number" oninput="convertToCADFromUSD(this.value)" onchange="convertToCADFromUSD(this.value)"/></td></tr>
+
+
+</table>
+
+
+<p><span id="currentDateOut"></span> </p>
+
+<script> 
+function convertToCADFromUSD(moneyInUSD)
+{
+	if (!isNaN(parseFloat(moneyInUSD)) && isFinite(moneyInUSD))
+	{
+		document.getElementById("moneyInUSDOutput").innerHTML= "" ;
+
+		document.getElementById("moneyInBrit").innerHTML= "" + (parseFloat(moneyInUSD)*0.77521).toFixed(2).toString();
+
+		document.getElementById("moneyInCAD").innerHTML= "" + (parseFloat(moneyInUSD)*1.34461).toFixed(2).toString();
+
+		document.getElementById("moneyInEuro").innerHTML= "" + (parseFloat(moneyInUSD)*0.88754).toFixed(2).toString();
+
+		document.getElementById("moneyInYen").innerHTML= "" + (parseFloat(moneyInUSD)*109.350).toFixed(2).toString();
+
+		document.getElementById("moneyInPeso").innerHTML= "" + (parseFloat(moneyInUSD)*18.2806).toFixed(2).toString();
+
+	} else {
+		document.getElementById("moneyInUSDOutput").innerHTML= "Please enter numbers only.";
+		document.getElementById("moneyInBrit").innerHTML= "";
+		document.getElementById("moneyInCAD").innerHTML= "";
+		document.getElementById("moneyInEuro").innerHTML= "";
+		document.getElementById("moneyInYen").innerHTML= "";
+		document.getElementById("moneyInPeso").innerHTML= "";
+	}
+
+	var today = new Date(); document.getElementById("currentDateOut").innerHTML= "Thanks for using the Money Converter." + "<br><br>" + "Today is " + (today.toDateString()) + "<br><br>" + "Programmed by Kar Y Ng";
+
+}
+</script>
+
+<p><a class="button" href="hw2.html">back to Home Work 2 cover page</a></p>
+
+</body>
+</html>
