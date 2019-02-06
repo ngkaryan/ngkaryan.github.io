@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<title>CNIT 132: Assignment Three</title>
+<body>
+
+<h1>WEBDAV: IETF Standard for Collaborative Authoring on the Web</h1>
+
+<p>WebDAV supports remote collaborative authoring of Web sites and individual documents, remote access to document management systems, and more. It is the most popular network file-system
+protocol for use across the wide-area Internet, and it has been integrated into
+ authoring tools of many types. WebDAV defines a series of extensions to the set of methods defined by HTTP</p>
+
+<p>Let’s say you are collaborating on an engineering project with one or more groups in geographically distant locations. Chances are you are using e-mail to help manage the project, notifying each other of updates to documents and code, filling directories with (not necessarily well-organized) revisions, sending messages to clarify what is completed
+and what remains to be done.</p>
+
+<p>What if instead you could simply edit Web documents (or any Web resource) in place at a URL? What if these documents were protected by a discoverable locking mechanism so they could not be overwritten, and you could effectively limit access rights? What if versions could be stored for later retrieval, and easily associated with relevant metadata such as author
+and last date modified?</p>
+
+<p>This is the vision behind the World Wide Web Distributed Authoring
+and Versioning working group of the Internet Engineering Task Force. WebDAV supports remote collaborative
+authoring of Web sites and individual documents, remote access to documentmanagement
+systems, and more. It is the most popular network file-system
+protocol for use across the wide-area Internet, and it has been integrated into
+existing authoring tools of many types.WebDAV defines a series of extensions to
+the set of methods defined by HTTP</p>
+
+<p>WebDAV extends HTTP to provide a standard infrastructure for asynchronous
+collaborative authoring across the Internet. The WebDAV extensions
+support the use of HTTP for interoperable publishing of a variety of
+content, providing a common interface to many types of repositories and
+making the Web analogous to a large-grain, network-accessible file system.
+Influential vendors such as Microsoft, Netscape, Xerox, IBM, and Novell
+have assisted in the WebDAV development, as has the World Wide Web
+Consortium. It is the intent of WebDAV to define the standards to make
+the Web a truly collaborative environment.</p>
+
+<h2>WEBDAV EXTENSIONS TO HTTP</h2>
+
+<p> No useful Webauthoring system could be constructed without extending HTTP.  Web- DAV extends HTTP by providing a set of open standards that can be used by all authoring tools.</p>
+
+<p>WebDAV extends the methods defined by HTTP
+version 1.1 (get, head, post, options, put,
+delete, and trace). The WebDAV protocol contains
+a set of features that can be used in numerous
+settings by applications that support collaborative
+work on remotely authored documents. We
+can partition WebDAV’s seven methods, as HTTP
+operations are called, into three groups: overwrite
+protection (lock, unlock), metadata management
+(propfind, proppatch), and namespace management
+(copy, move, mkcol).</p>
+
+<p>Internationalization is another major benefit of
+XML. Since XML mandates support for the UTF-
+8 and UTF-16 encodings of the ISO 10646 character
+encoding standard, as well as language tagging,
+properties can express content in the vast
+majority of human languages. Finally, by using
+XML, WebDAV properties can support other
+metadata activities based on XML, such as the
+Resource Description Framework (RDF) under development
+at the W3C.</p>
+
+<p>The development of useful sets of properties, or
+metadata, is considered by most Web authorities to
+be extremely important for the future of the Web
+considered as both a human- and machine-readable
+resource. One set of metadata developed to assist
+Web searching is known as the Dublin Core, a schema
+for the creation of digital library catalogs. Since the
+WebDAV working group expects natural communities
+like the users of the Dublin Core to develop
+their own metadata sets, WebDAV decided to focus
+instead on developing facilities for creating, modifying,
+deleting, and retrieving metadata.</p>
+
+<p>These facilities allow for the manipulation of
+metadata from multiple schemas, allowing the
+schema itself to vary with domain of use. While the
+Dublin Core schema, for example, is appropriate
+in a general context, it may not be ideal in a legal
+setting. By being metadata-schema–neutral, the
+WebDAV approach allows the most appropriate
+schema to be used in any context. WebDAV thus
+focuses on how properties are stored and retrieved,
+rather than on what properties mean.</p>
+
+<h2>Name-Space Management</h2>
+
+<p>If the Web is to successfully support distributed
+authoring, users must be able to manage the name
+space of the Web server they are writing to. Discovery
+of what resources currently populate the relevant
+portion of the server name space, plus the
+ability to copy, move, and delete those resources,
+are the key elements required.</p>
+
+<p>In WebDAV, collections provide direct containment
+for local resources and referential containment
+for resources located anywhere on the Web. The
+WebDAV server maintains consistency in the direct
+containment relationships. For example, when a new
+resource is PUT into the namespace of a collection,
+it is automatically added to the collection.</p>
+
+<p>WebDAV offers the ability to copy and move
+Web pages and to receive a listing of resources in a
+collection. Copy capabilities offer support for
+changes in resource ownership, as well as resource
+modifications and backups. Rename capabilities
+support the adoption of new naming conventions
+or the correction of typing errors.</p>
+
+<p>It turns out, however, that defining the meaning
+of copy and rename can be problematic in the
+context of the Web, because some classes of Web
+resources, such as CGI programs or other scripts,
+correspond to the output of a computational
+process. Since one CGI program can generate an
+extremely large number of resources, what does it
+mean to copy one of the outputs of the script?
+WebDAV has addressed this issue by adding a
+“source” link to automatically generated resources
+that points to the location of the program that generated
+the page. Copy and rename can then be
+applied to the source program.</p>
+
+<p>Copy and move also have ramifications with
+respect to properties. How should properties behave
+after a copy or a move? It would seem that all properties
+on the copied or moved resource should be
+identical to those on the original. However, there are
+really two classes of properties: live and static. Static
+properties retain their value, once set, until they are
+explicitly modified by a client. Live properties, in
+contrast, have their syntax and semantics enforced by
+the server, and may vary at any time. One example
+of a live property is the content length of a resource:
+Each time the resource is updated, the value of the
+property will also be updated.</p>
+
+<p>Live properties may apply to only part of a server’s
+namespace. For example, on one Web server the
+cache expiration date (when a Web cache should discard
+and re-update its copy of a resource) is automatically
+set to never expire only in the directory containing
+bitmap images. If a resource is copied or
+moved to this directory, the server-controlled cache
+expiration date is automatically set, possibly overwriting
+the previous value. These cases are addressed
+by having copy and move operations perform a besteffort
+duplication of properties, duplicating live properties
+at the destination when possible, and replacing
+them with a static property containing a snapshot of
+the live property’s value if not. Optionally, if best-effort
+is too uncontrolled, copy and move can be
+instructed to fail when live properties cannot be
+maintained as such at the destination.</p>
+
+<p>Listing the contents of a collection is very similar
+to listing a directory of a file system. Most existing
+operations for listing a directory, such as “ls” or
+“dir,” provide the name of a file, and an option for
+retrieving limited sets of properties about the file,
+such as its size, owner, and access permissions.
+Because WebDAV has an existing property-retrieval
+mechanism, it made little sense to define a new
+operation for listing a collection. WebDAV’s property
+retrieval allows, with a single operation, a hier-
+archical retrieval of properties on a collection,
+returning for each resource its name and requested
+properties. This mechanism had enough expressive
+power to serve as the “list a collection’s members”
+operation as well.</p>
+
+<h2>Ordered Collections</h2>
+
+<p>In some collections, it’s desirable for the member
+resources to be listed always in the same order. We
+would want a collection that included the chapters
+of a book to return the list of chapters in order, for
+example, rather than placing “chapter10” right
+after “chapter1” as an alphabetical sort would. A
+user-maintained ordering could achieve the
+desired sequence in this case.</p>
+
+<p>The WebDAV Ordered Collections Protocol,
+approved in December 2003, provides a mechanism
+for creating this kind of persistent, usermaintained
+ordering of the members of a collection.</p>
+<p>The protocol has three main capabilities:</p>
+<ul>
+<li> creating a new ordered collection, </li>
+<li> creating or moving resources in ordered collections,
+and</li>
+<li> changing the ordering of ordered collection
+members.</li>
+</ul>
+<p>The new orderpatch method changes the ordering of one or more collection members, providing
+an ordering specification for each resource being reordered.</p>
+<p>As with unordered collections, clients can list the members of an ordered collection in order using the propfind method.</p>
+
+<h2>Access Control</h2>
+<p>All but the simplest HTTP servers have mechanisms
+for controlling access to the resources they
+host, enabling administrators to control which
+resources are readable, writeable, and by whom.
+Given that WebDAV servers are HTTP servers, they
+inherit these HTTP access control mechanisms.</p>
+
+<p>One challenge in drafting the access control
+protocol was to develop a privilege set flexible
+enough to faithfully expose the underlying repository’s
+privilege model, yet standard enough to
+ensure interoperability.</p>
+
+<p>Administrators use different mechanisms on
+each server to control resource access. Apache’s
+configuration files, for example, must be modified
+in conjunction with file-system permissions, and
+no other server uses the Apache configuration file
+format. Unfortunately, every server has a different
+configuration mechanism, and they typically
+aren’t remotely accessible. Those that are remotely
+accessible generally take the form of Web applications
+aimed at human users, providing no support
+for programmatic access. These twin
+drawbacks — the lack of both a standard access
+control configuration mechanism and program</p>
+
+<h2>HOW WEBDAV EXTENDED HTTP</h2>
+
+<p>There are three general mechanisms available for
+adding functionality to HTTP: URL “munging,”
+RPC-via-POST, and adding new methods.</p>
+
+<h3>URL Munging</h3>
+
+<p>URL munging is a technique whereby a command is
+appended to the end of a URL, typically after a “?”.
+For example, a versioning system might add a checkout
+command to a URL as follows: http://www.
+editing.com/myresources/index.html?command=
+checkout.</p>
+
+<p>URL munging has the advantage of being easily
+parsed by a CGI script. The script looks for the
+question mark, and then parses everything after it,
+and acts as the intermediary between HTTP and
+the underlying repository (in this example, the store
+used by the version control system). However, there
+are also significant drawbacks. The first problem is
+interactions between different URL munging
+schemes. If two extensions use the same URL
+munging convention, it will cause adverse interactions
+between them.</p>
+
+<p>An even worse problem is the assumption by
+URL munging that HTTP GET is the only
+method used to retrieve Web contents. Unfortunately,
+the semantics of HTTP’s other methods
+become unclear when applied to a munged URL.
+Because of these problems, URL munging is widely
+disparaged within the community of protocol
+developers extending HTTP.</p>
+
+<h3>HTTP-via-POST</h3>
+
+<p>Remote procedure calls permit a client to execute
+a procedure on a remote server. This is accomplished
+by marshalling parameters for the operation on the client side, 
+and sending the parameters,
+along with an identifier for the function to be executed,
+to the server. The server unmarshals the
+parameters, executes the specified function, and
+then sends back results to the client (after a marshalling
+step).</p>
+
+<p>In the RPC-via-POST method of extending
+HTTP, a client marshals parameters into an HTTP
+message body, along with an identifier for the function
+to be performed, and then sends the message
+body to the server using the HTTP POST method.
+POST is used because it has a sufficiently open definition
+so that almost any operation can be invoked
+using it. The server performs the stated operation
+and returns a message body in the response giving
+the results of the operation. The Internet Printing
+Protocol is an example of a protocol that uses this
+approach.</p>
+
+<p>The advantage of RPC-via-POST is that, like
+URL munging, it easily maps onto existing mechanisms
+for extending HTTP servers such as CGI,
+Microsoft’s Internet Server API (ISAPI), and the
+Netscape Server API (NSAPI). It also allows
+domain-specific marshalling of parameters, so that
+all parameters do not need to be mapped into
+HTTP methods and headers. The latter has the
+benefit of reducing unforeseen interactions with the
+rest of HTTP’s operations. The drawback of this
+approach is that POST ends up being a security
+hole through which almost any operation can be
+executed. Since each individual extension is free to
+marshall its parameters in separate ways, a program
+trying to determine what operation is being performed
+by looking at a POST message body would
+have a very difficult task indeed. For similar reasons,
+performing access control on POST-based
+operations is extremely difficult.</p>
+
+<h3>Adding New Methods</h3>
+
+<p>The final mechanism for extending HTTP is to
+create a new HTTP method for each new operation
+(which in practice translates into using the
+HTTP headers to marshall parameters for each
+new operation). The “add new methods” approach
+has the advantage of using the designed-in mechanism
+for extending HTTP, which can therefore
+take advantage of existing features such as operation
+precondition headers like If-[None-]Match.
+Operation-based security and access control is easy,
+since the operation always occurs at a predictable
+location in the protocol stream (the HTTP
+method is always at the beginning of an HTTP
+message).</p>
+
+<p>There are some drawbacks, however. First, it
+turns out that HTTP headers are not sufficient for
+marshalling many kinds of parameters. For example,
+data that is potentially unbounded in length
+cannot be well-encoded in HTTP headers, nor can
+data that contains human-readable text (which
+requires internationalization using multi-octet
+character sets like Unicode, along with language
+tagging). Second, since existing HTTP headers can
+be applied to any new method, the interactions
+between existing headers and new methods need to
+be explicitly defined. Finally, the existing mechanisms
+for extending HTTP servers do not easily
+accommodate adding new methods.</p>
+
+<p>However, in the end, the security and access
+control advantages of adding new methods outweighed
+the (relatively minor) drawbacks of the
+approach. In those cases in which parameters could
+not be easily marshaled into HTTP headers, Web-
+DAV has used XML in the message body to encode
+the parameters, thus gaining some of the advantages
+of the RPC-via-POST approach without its
+security and access control disadvantages.</p>
+
+
+<h2>Server support</h2>
+<p>Wikipedia lists the following examples of server support for WebDAV.</p>
+
+<ul>
+<li>Apache HTTP Server provides WebDAV modules based on both davfs and Apache Subversion</li>
+<li>Microsoft's IIS also has a WebDAV module.</li>
+<li>Nginx has a very limited optional WebDAV module[4] and a third-party module</li>
+<li>SabreDAV is a PHP application that can be used on Apache or Nginx in lieu of their bundled modules</li>
+<li>ownCloud is a cloud storage PHP application which offers full WebDAV support</li>
+<li>Nextcloud is a cloud storage PHP application which offers full WebDAV support</li>
+<li>lighttpd has an optional WebDAV module</li>
+<li>Caddy has an optional WebDAV module</li>
+</ul>
+
+<h2>Client support</h2>
+<ul>
+<li>Git supports writing to HTTP remotes, although the "smart" Git protocol for HTTP requiring special server support was made the preferred protocol over WebDAV</li>
+<li>Linux via GVfs, including GNOME Files and via KIO, including Konqueror and Dolphin</li>
+<li>macOS, including native support for CalDAV and CardDAV, the design of which is based on WebDAV</li>
+<li>Microsoft Windows, including native support in Explorer</li>
+<li>Microsoft Office</li>
+</ul>
+
+<h2>CONCLUSION</h2>
+
+<p>To date, the Web has been a read-only medium.
+WebDAV changes this, making the Web a writable,
+collaborative medium. What should you expect
+from this transformation?</p>
+
+<p>Initially, WebDAV will be supported by existing
+tools that operate on one file at a time. Such
+tools—word processors, spreadsheets, and graphics
+and text editors—will still support operations
+on files in a file system but will additionally support
+“save to the Web” capabilities. This will open
+the door for remote collaboration, supporting a
+seamless transition from individual to collaborative
+group work.</p>
+
+<p>WebDAV will have its greatest initial impact on
+small- to medium-sized workgroups that homogeneously
+support distributed authoring and versioning.
+Because documents will be editable in-place on
+the Web, organizations will begin to see greater benefit
+in performing work in the Web environment
+rather than on local, isolated disk drives. This will in
+turn provide an incentive for work practices to coalesce
+around a local intranet. Over time, as critical
+mass grows, WebDAV will also reduce the accidental
+costs of collaboration between workgroups and
+between organizations. Once documents are routinely
+kept on a local intranet, starting a collaboration
+with another group in the same organization,
+or across organizational boundaries, becomes a simple
+matter of adding another person to the access
+control list for the document.</p>
+
+<p>WebDAV also shows promise as an infrastructure
+for developing distributed software engineering
+environments and other complex information
+products. Since the artifacts of software development,
+like requirements documents and source
+code, are amenable to remote authoring via Web-
+DAV, distributed authoring and versioning can
+support virtual teams working together on a common
+software development task.</p>
+
+<p>Finally, WebDAV will make it much easier for
+the average person to create Web-pages, since they
+will be editable in-place, typically in a location provided
+by an Internet service provider. Contrast this
+with the current situation, where users have to FTP
+files to a specific directory, and understand how
+these files map into a set of URLs.
+Product support for WebDAV is just beginning
+to appear. The next few years should see strong
+growth in the development of Web-based collaborative
+tools. Enhanced collaboration will help the
+Web achieve its promise as the most flexible medium
+of world-wide communication yet seen.</p>
+
+<h2>References</h2>
+<ul>
+<li><a class="button" href="https://www.ics.uci.edu/~ejw/authoring/intro/webdav_intro.pdf">WEBDAV: IETF Standard forCollaborative Authoring on the Web, by E. JAMES WHITEHEAD, JR. University of California at Irvine, and MEREDITH WIGGINS IEEE Internet Computing, SEPTEMBER • OCTOBER 1998</a></li>
+
+<li><a class="button" href="https://users.soe.ucsc.edu/~ejw/papers/dav-ic-2005-final.pdf">WebDAV:Versatile Collaboration Multiprotocol, Editor: Jim Whitehead • ejw@cs.ucsc .edu, JANUARY • FEBRUARY 2005</a></li>
+
+<li><a class="button" href="https://en.wikipedia.org/wiki/WebDAV">WebDav Wiki page</a></li>
+
+<li><a class="button" href="http://www.webdav.org/">WebDav Resources</a></li>
+
+<li><a class="button" href="https://www.greenbytes.de/tech/webdav/">GreenBytes (Latest WebDav news)</a></li>
+
+<li><a class="button" href="https://hpi.de/fileadmin/user_upload/fachgebiete/meinel/papers/Web_3.0/2000_Qu_SIGUCCS.pdf">Implementation of a WebDAV-based Collaborative
+Distance Learning Environment
+Changtao Qu, Thomas Engel, Christoph Meinel
+Institute of Telematics
+Bahnhofstr. 30-32, D-54292 Trier, Germany, 2000</a></li>
+</ul>
+
+</body>
+</html>
