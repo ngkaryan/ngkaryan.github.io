@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Form example 2</title>
+<style>
+input {text-align: right;}
+body {background-color: #f5f5dc;}
+.body { width: 550px; margin: 0px auto;}
+</style>
+<script>
+
+function init()
+{ 
+	document.forms["myform"].elements["num1"].value = Math.floor(Math.random() * 10);
+	document.forms["myform"].elements["num2"].value = Math.floor(Math.random() * 10);
+}
+
+function process()
+{ 
+	var number1, number2, product;
+	number1 = document.forms["myform"].elements["num1"].value;
+	number2 = document.forms["myform"].elements["num2"].value;
+
+	n1 = parseInt(number1);
+	n2 = parseInt(number2);
+	p = n1 * n2;
+
+	product = n1 * n2;
+
+	if (document.forms["myform"].elements["product_result"].value == product)
+	{
+		if (confirm("Very good! Do you want to continue")) {
+			txt = "You pressed OK!";
+		} else {
+			txt = "You pressed Cancel!";
+			close(); // I don't know what it means by exiting from the script, thus I close the windows, if the users confirm the closure of the tab.
+		} 
+		init();
+	}
+	else
+		window.alert("entry incorrect. Please try again");
+
+	document.forms["myform"].elements["product_result"].value = "";
+}
+</script>
+</head>
+<body onload="init()">
+<section class="body">
+<h2>Multiplication Exercises</h2>
+<form name="myform">
+<table>
+
+<tr>
+<td>First Number:</td> 
+<td><input type="text" name="num1" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Second Number:</td> 
+<td><input type="text" name="num2" size="10" readonly></td>
+</tr>
+
+<tr>
+<td>Product is:</td> 
+<td><input type="text" name="product_result" size="10"></td>
+</tr>
+
+</table>
+<br><br>
+<input type="button" onclick="process()" value="SUBMIT">
+<input type="reset" value="RESET">
+</form>
+</section>
+</body>
+</html>
