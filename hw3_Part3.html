@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- adapted from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_temp_converter_fahrenheit_to_celsius -->
+<title>Part 3 of CNIT 133 Homework 3</title>
+</head>
+<body>
+
+<h2>Fahrenheit and Celsius Temperature Converter</h2>
+
+<form name="myform">
+<input type="number" id="temperatureToConvert" size="10">
+<button type="button" onclick="convertToCelsiusFromFahrenheit()">Celsius</button>
+<button type="button" onclick="convertToFahrenheitFromCelsius()">Fahrenheit</button>
+</form>
+
+
+<p> <span id="temperatureName"></span> </p>
+
+<p> <span id="temperatureConverted"></span></p>
+
+<p> <span id="currentDateOut"></span></p>
+
+<script> 
+function convertToCelsiusFromFahrenheit()
+{
+	temperatureInFahrenheit = document.getElementById('temperatureToConvert').value
+	if (!isNaN(parseFloat(temperatureInFahrenheit)) && isFinite(temperatureInFahrenheit))
+	{
+		document.getElementById("temperatureName").innerHTML= "Fahrenheit Temperature is: " + (parseFloat(temperatureInFahrenheit)).toString();
+
+		document.getElementById("temperatureConverted").innerHTML= "Celsius Temperature is: " + ((parseFloat(temperatureInFahrenheit)-32)*5/9).toString();
+	} else {
+		document.getElementById("temperatureName").innerHTML= ""
+		document.getElementById("temperatureConverted").innerHTML= "Please enter numbers only.";
+	}
+
+	var today = new Date(); document.getElementById("currentDateOut").innerHTML= "Thanks for using the Temperature Converter." + "<br><br>" + "Today is " + (today.toDateString()) + "<br><br>" + "Programmed by Kar Y Ng";
+
+}
+
+function convertToFahrenheitFromCelsius(temperatureInCelsius)
+{
+	temperatureInCelsius = document.getElementById('temperatureToConvert').value
+	if (!isNaN(parseFloat(temperatureInCelsius)) && isFinite(temperatureInCelsius))
+	{
+		document.getElementById("temperatureName").innerHTML= "Celsius Temperature is: " + (parseFloat(temperatureInCelsius)).toString();
+
+		document.getElementById("temperatureConverted").innerHTML= "Fahrenheit Temperature is: " + ((parseFloat(temperatureInCelsius)*9/5) + 32).toString();
+	} else {
+		document.getElementById("temperatureName").innerHTML= ""
+		document.getElementById("temperatureConverted").innerHTML= "Please enter numbers only.";
+	}
+
+	var today = new Date(); document.getElementById("currentDateOut").innerHTML= "Thanks for using the Temperature Converter." + "<br><br>" + "Today is " + (today.toDateString()) + "<br><br>" + "Programmed by Kar Y Ng";
+
+}
+
+
+</script>
+
+</body>
+</html>
