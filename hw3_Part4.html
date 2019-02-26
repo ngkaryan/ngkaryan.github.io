@@ -12,15 +12,15 @@ body {background-color: #f5f5dc;}
 
 function init()
 { 
-	document.forms["myform"].elements["num1"].value = Math.floor(Math.random() * 10);
-	document.forms["myform"].elements["num2"].value = Math.floor(Math.random() * 10);
+	document.getElementById("num1").innerHTML = Math.floor(Math.random() * 10);
+	document.getElementById("num2").innerHTML = Math.floor(Math.random() * 10);
 }
 
 function process()
 { 
 	var number1, number2, product;
-	number1 = document.forms["myform"].elements["num1"].value;
-	number2 = document.forms["myform"].elements["num2"].value;
+	number1 = document.getElementById("num1").innerHTML;
+	number2 = document.getElementById("num2").innerHTML;
 
 	n1 = parseInt(number1);
 	n2 = parseInt(number2);
@@ -47,28 +47,11 @@ function process()
 </head>
 <body onload="init()">
 <section class="body">
-<h2>How much is the product of the following two numbers?</h2>
+<h2>Mulplitication Exercise</h2>
 <form name="myform">
-<table>
-
-<tr>
-<td>First Number:</td> 
-<td><input type="text" name="num1" size="10" readonly></td>
-</tr>
-
-<tr>
-<td>Second Number:</td> 
-<td><input type="text" name="num2" size="10" readonly></td>
-</tr>
-
-<tr>
-<td>Product is:</td> 
-<td><input type="text" name="product_result" size="10"></td>
-</tr>
-
-</table>
-<br><br>
-<input type="button" onclick="process()" value="SUBMIT">
+<p>How much is <span id="num1"></span>  times <span id="num2"></span> ?</p>
+<p><input type="number" name="product_result" size="10">
+<input type="button" onclick="process()" value="SUBMIT"></p>
 </form>
 </section>
 </body>
