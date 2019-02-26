@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+<title>Part 1 of CNIT 133 Homework 3</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+	$("#explanatoryHeader").slideToggle("slow");
+	$("#scoreInputHeader").slideToggle("slow");
+	$("#scoreComputeHeader").slideToggle("slow");
+  });
+}); // end ready
+</script>
+
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+td {
+  text-align: right;
+}
+
+body { background-color:  #FFFFCC;}
+
+</style>
+
+<script>
+var namefields= ["0.50", "0.20", "0.2", "0.1"];
+var workname= ["Homework", "Midterm", "Final", "ACR"];
+var numfields = namefields.length;
+var sum = 0;
+
+/* from https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-dollars-currency-string-in-javascript */
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'decimal',
+  minimumFractionDigits: 2,
+  // the default value for minimumFractionDigits depends on the currency
+  // and is usually already 2
+});
+
+function process()
+{
+	// var stringToWrite = "";
+	sum = 0;
+	subtotal = 0;
+	for (var i = 0; i < numfields; i++) {
+
+		document.forms["myform"].elements["quantitySold"+i].value = 
+			document.getElementById(namefields[i]).value;
+		document.forms["myform"].elements["revenue"+i].value = 
+		  	formatter.format(parseFloat(namefields[i]) * parseFloat(document.getElementById(namefields[i]).value));
+
+		subtotal += parseFloat(namefields[i]) * parseFloat(document.getElementById(namefields[i]).value)
+		sum += parseFloat(document.forms["myform"].elements["quantitySold"+i].value);
+	}
+
+	document.forms["myform"].elements["final_average"].value = formatter.format(subtotal);
+	if ((100 >= subtotal) && (90 <= subtotal))
+	{
+		document.forms["myform"].elements["letter_grade"].value = "A";
+	}
+	else if ((89 >= subtotal) && (80 <= subtotal))
+	{
+		document.forms["myform"].elements["letter_grade"].value = "B";
+	}
+	else if ((79 >= subtotal) && (70 <= subtotal))
+	{
+		document.forms["myform"].elements["letter_grade"].value = "C";
+	}
+	else if ((69 >= subtotal) && (60 <= subtotal))
+	{
+		document.forms["myform"].elements["letter_grade"].value = "D";
+	}
+	else
+	{
+		document.forms["myform"].elements["letter_grade"].value = "F";
+	}
+}
+
+function reset()
+{
+	sum = 0;
+	for (var i = 0; i < numfields; i++) {
+		document.getElementById(namefields[i]).value = 0;
+	}
+}
+</script>
+
+</head>
+
+<body>
+
+<script>
+ document.write("Student ");
+ var box = document.createElement("input");
+ box.id = "salespersonname";
+ box.type = "text";
+ box.title = "Please make sure that the student's name is spelled correctly";
+ document.body.appendChild(box);
+</script>
+
+<div id="flip">Click to slide the panel down or up</div>
+
+<span id="explanatoryHeader"><i>The following webpage contains the heading, Student Grades, and uses a script that inputs a student's homework average, mid-term exam score, final exam score, and ACR (all as integers)</i></span>
+
+<form name="myform">
+
+<table>
+<tr id="scoreInputHeader"><td>Work</td>
+<script>
+for (var i = 0; i < numfields; i++) {
+	document.write("<th>" + (workname[i]) + "</th>");
+}
+</script>
+</tr><tr><td>Score</td>
+<script>
+function validate(id, arg)
+{
+	if (!isNaN(parseInt(arg)) && (parseInt(arg) >= 0) && (100 >= parseInt(arg)) && (arg >>> 0 === parseFloat(arg))  )
+	{
+		// alert("got this.id:" + id + " " + "arg:" + " " + arg);
+	}
+	else
+	{
+		alert("please input an integer between 0 and 100");
+		document.getElementById(id).value = "";
+	}
+}
+
+
+
+for (var i = 0; i < numfields; i++) {
+	document.write("<td><input type=\"number\" id=\"" + namefields[i] + "\" size=\"10\" onfocusout=\"validate(this.id, this.value)\" ></td>");
+}
+</script>
+</tr>
+</table>
+
+
+<input type="button" onclick="process()" value="SUBMIT">
+<input type="reset" value="RESET" onclick="reset()">
+
+<table>
+<tr id="scoreComputeHeader"><th>Work #</th><th>Work</th><th>Score</th><th>Weighed Score</th></tr>
+<script>
+
+ for (var i = 0; i < numfields; i++) {
+ 	document.write("<tr><td>" + workname[i] + "</td><td>" + formatter.format(namefields[i]) + "</td><td><input type =\"text\" name=\"quantitySold" + i + "\" size=\"10\" readonly></td><td><input type=\"text\" name=\"revenue" + i + "\" size=\"10\" readonly></td><tr>");
+ }
+
+</script>
+
+<tr>
+<td colspan="3">Final Average:</td> 
+<td><input type="text" name="final_average" size="10" readonly></td>
+</tr>
+
+<tr>
+<td colspan="3">Final Letter Grade:</td> 
+<td><input type="text" name="letter_grade" size="10" readonly></td>
+</tr>
+
+</table>
+
+</form>
+
+    </body> 
+</html> 
