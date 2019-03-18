@@ -1,0 +1,54 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<title>Computing squares and cubes of numbers</title>
+
+<style>
+table, th, td {
+  border:none;
+  // border: 1px solid black;
+  border-collapse: collapse;
+  font-family: arial;
+}
+th, td {
+  padding: 5px;
+}
+
+th {
+  background-color: maroon; // #4CAF50;
+  color: white;  
+}
+
+td {
+  text-align: right;
+}
+
+table tr:nth-child(odd) td{
+           background: yellow; // #ccc;
+}
+table tr:nth-child(even) td{
+            background: orange; // #fff;
+}
+
+
+</style>
+
+<body>
+        <script> 
+	document.write("<table width=\"100%\"><th>Year</th><th>Amount on Deposit</th><th>Interest Rate</th>");
+	principal = 1000.00
+	for (let i = 0.05; i <= 0.1; i+=0.01) {
+		for (let y = 1; y <= 10; y+=1) {
+			total =  principal*(Math.pow(1+i, y));
+			document.write("<tr><td>" + y + "</td><td>" + total.toFixed(2) + "</td><td>" + i.toFixed(2) + "</td></tr>");    
+			// document.write("<tr><td>" + y + "</td><td>" + principal*((1+i)**y) + "</td><td>" + i + "</td></tr>"); 
+		}
+	}
+	document.write("</table>");
+
+        </script> 
+
+	<p><a class="button" href="hw4.html">back to Home Work 4 cover page</a></p>
+
+    </body> 
+</html> 
