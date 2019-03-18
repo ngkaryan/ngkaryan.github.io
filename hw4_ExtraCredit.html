@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"> 
+
+<head> 
+<title>Drawing a hollow square using asterisks</title>
+<style> 
+
+/* This text is in monospace */
+.class { 
+	font-family: monospace; 
+}
+
+</style> 
+
+<script> 
+
+// From:  https://www.dreamincode.net/forums/topic/134646-hollow-square/
+ 
+function HollowBox(squareSide) { 
+
+  if ((2> squareSide) || ( 10 < squareSide) )
+  {
+	alert("the side of the square should not be smaller than 2 or bigger than 10");
+  }
+  else
+  {
+  var squareSize; 
+ 
+  var sStr = ''; 
+ 
+ for(squareSize=0;squareSize<=squareSide - 1;squareSize++) { 
+
+  sStr = "* "; 
+
+  for(i=0;i<squareSize;i++){ 
+ 
+    sStr +="* "; 
+
+  } 
+
+  sStr +="*<br>"; 
+
+  for(i=0;i<squareSize;i++){ 
+    sStr +="* "; 
+
+    for(j=0;j<squareSize;j++){ 
+        sStr +="  "; 
+    } 
+
+    sStr +="*<br>";  
+  } 
+
+  sStr +="* ";   
+ 
+  for(i=0;i<squareSize;i++){ 
+    sStr +="* "; 
+  } 
+
+  sStr +="* "; 
+ } 
+
+// document.write(sStr); 
+
+ document.getElementById('preRegion').innerHTML = sStr;  
+ }
+} 
+
+</script> 
+</head> 
+<body>  
+<form>Sice of Square Side: <input type="number" name="squareSide" id="squareSide"></form>
+<p><button onclick="HollowBox(document.getElementById('squareSide').value)">Click to run the script again</button>
+
+   <button onclick="document.getElementById('preRegion').innerHTML = ''">Clear box</button></p> 
+ 
+<pre id="preRegion"></pre> 
+
+<p><a class="button" href="hw4.html">back to Home Work 4 cover page</a></p>
+
+</body> 
+
+</html> 
