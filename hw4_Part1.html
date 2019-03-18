@@ -1,0 +1,95 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+
+<head>
+<!-- https://www.w3schools.com/html/html5_draganddrop.asp -->
+<title>Computing squares and cubes of numbers</title>
+
+<style>
+#div1 {
+  width: 350px;
+  height: 70px;
+  padding: 10px;
+  border: 1px solid #aaaaaa;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+td {
+  text-align: right;
+}
+
+p, h3 {
+  font-family: arial;
+}
+
+</style>
+<script>
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+
+
+<body>
+        <script> 
+	product = 1;
+	for (let i = 5; i <= 20; i+=3) {          
+		product = product * i ;
+	}
+	document.write("<p>Using for loop, the product of integers from 5 to 20, spaced by 3, is computed to be " + product + "</p>" );
+
+	sum  = 0;
+	for (let i = 5; i <= 20; i+=3) {          
+		sum = sum + i ;
+	}
+	document.write("<p>Using for loop, the sum of integers from 5 to 20, spaced by 3, is computed to be " + sum + "</p>" );
+
+
+	product = 1;
+	i = 3;
+	while (i <= 31) {          
+		product = product * i ;
+		i+=4;
+	}
+	document.write("<p>Using while loop, the product of integers from 3 to 31, spaced by 4, is computed to be " + product + "</p>" );
+
+
+	sum = 0;
+	i = 3;
+	while (i <= 31) {          
+		sum = sum + i ;
+		i+=4;
+	}
+	document.write("<p>Using while loop, the sum of integers from 3 to 31, spaced by 4, is computed to be " + sum + "</p>" );
+
+        </script> 
+
+
+<h3>Please drag the Services image into the rectangle:</h3>
+
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<img id="drag1" src="img_logo.gif" alt="services image" draggable="true" ondragstart="drag(event)" width="336" height="69">
+
+
+	<p><a class="button" href="hw4.html">back to Home Work 4 cover page</a></p>
+
+    </body> 
+</html> 
