@@ -1,0 +1,155 @@
+body {
+  background-color: yellow;
+}
+
+table {
+  background-color: cyan;
+  border-spacing: 5px;
+} 
+
+
+a:link   { 
+  color: red
+}
+
+a:visited   { 
+  color: blue 
+}
+
+a:active  { 
+  color: red
+}
+
+a:hover  { 
+  color: red
+}
+
+h1 {
+  text-align: center;
+  color: red;
+}
+
+
+h2 {
+  text-align: right;
+  color: blue;
+}
+
+h3 {
+  text-align: right;
+  color: red;
+}
+
+td {
+  text-align: center;
+  padding: 10px;
+
+}
+
+p {
+  font-size: 16px;
+}
+
+span {
+  color:black;
+  font-weight:bold;
+  font-size:50px;
+}
+
+.bluespan {
+  color:blue;
+  font-weight:bold;
+  font-size:50px;
+}
+
+.redspan  {
+  color:red;
+  font-weight:normal;
+  font-size:16px;
+}
+
+.example5 {
+ height: 50px;	
+ overflow: hidden;
+ position: relative;
+}
+
+.example5 h3 {
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ margin: 0;
+ line-height: 50px;
+ text-align: right;
+ color: green;
+ font-family: arial;
+ /* Apply animation to this element */	
+ -moz-animation: example5 5s linear infinite alternate;
+ -webkit-animation: example5 5s linear infinite alternate;
+ animation: example5 5s linear infinite alternate;
+}
+
+@-moz-keyframes example5 {
+ 0%   { -moz-transform: translateX(70%); }
+ 100% { -moz-transform: translateX(0%); }
+}
+@-webkit-keyframes example5 {
+ 0%   { -webkit-transform: translateX(70%); }
+ 100% { -webkit-transform: translateX(0%); }
+}
+@keyframes example5 {
+ 0%   { 
+ -moz-transform: translateX(70%); /* Firefox bug fix */
+ -webkit-transform: translateX(70%); /* Firefox bug fix */
+ transform: translateX(-70%); 		
+ }
+ 100% { 
+ -moz-transform: translateX(0%); /* Firefox bug fix */
+ -webkit-transform: translateX(0%); /* Firefox bug fix */
+ transform: translateX(0%); 
+ }
+}
+
+#content #nav table {
+    /* background-color: cyan; #FF0; */
+
+  background-color: cyan;
+  color: black;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+  /* -webkit-animation-fill-mode: forwards; */
+
+  animation-fill-mode: forwards;
+  animation-name: example;
+  animation-duration: 10s;
+  animation-delay: 5s
+
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  from { 
+	background-color: cyan;
+	color: black;
+  }
+  to {
+	background-color: green;
+	color: white;
+  }
+}
+
+/* Standard syntax */
+@keyframes example {
+  from {
+	background-color: cyan;
+	color: black;
+  }
+  to {
+	background-color: green;
+	color: white; 
+  }
+}
+
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions */
