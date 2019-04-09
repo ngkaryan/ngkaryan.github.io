@@ -1,0 +1,137 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+<title>Part 3 of CNIT 133 Homework 5: State Information</title>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+td {
+  text-align: right;
+}
+
+ 
+body { background-color:  #FFFFCC;}
+
+</style>
+
+<script>
+var namefields= ["State"];
+var numfields = namefields.length;
+
+var stateAbbr = ["AL", "AK", "AZ", "AR", "CA", "CO"];
+var stateName = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado"];
+var stateCapital = ["Montgomery", "Juneau", "Phoenix", "Little Rock", "Sacramento", "Denver"];
+var statePopulation = [4779736, 710231, 6392017, 2915918, 37253956, 5029196 ];
+
+var lowerCaseStateName = stateName.join(' ').toLowerCase().split(' ');
+
+// function indexOf(l1: string, l2: string, ignoreCase = true): number {
+//   return (ignoreCase ? l1.toLowerCase() : l1).indexOf((ignoreCase ? l2.toLowerCase() : l2));
+// }
+
+var stateIndex = -1;
+
+/* from https://stackoverflow.com/questions/149055/how-can-i-format-numbers-as-dollars-currency-string-in-javascript */
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+  // the default value for minimumFractionDigits depends on the currency
+  // and is usually already 2
+});
+
+function process()
+{
+	document.forms["myform"].elements["thanksMsg"].value = "Thanks for your inquiry, here is the information you requested:";
+	for (var i = 0; i < numfields; i++)
+	{
+		document.forms["myform"].elements["StateAbbr"+i].value = 			stateAbbr[stateIndex];
+		document.forms["myform"].elements["StateName"+i].value = stateName[stateIndex];
+		document.forms["myform"].elements["Capital"+i].value = stateCapital[stateIndex];
+		document.forms["myform"].elements["Population"+i].value = statePopulation[stateIndex];
+	}
+	stateIndex = -1;
+}
+
+function reset()
+{
+	stateIndex = -1;
+	for (var i = 0; i < numfields; i++) {
+		document.forms["myform"].elements["StateAbbr"+i].value = "";
+		document.forms["myform"].elements["StateName"+i].value = "";
+		document.forms["myform"].elements["Capital"+i].value = "";
+		document.forms["myform"].elements["Population"+i].value = "";
+	}
+	document.forms["myform"].elements["thanksMsg"].value = "";
+}
+</script>
+
+</head>
+
+<body>
+
+<form name="myform">
+<table>
+<tr><th>State</th></tr>
+<script>
+
+function validate(id, arg)
+{
+	reset();
+	let stateAbbrIndex = stateAbbr.indexOf(arg.toUpperCase());
+	let stateNameIndex = lowerCaseStateName.indexOf(arg.toLowerCase());
+
+	if (-1 < stateAbbrIndex)
+	{
+		stateIndex =  stateAbbrIndex;
+	}
+	if (-1 < stateNameIndex)
+	{
+		stateIndex =  stateNameIndex;
+	}
+
+	if (-1 == stateIndex)
+	{
+		alert("state not found");
+		document.getElementById(id).value = "";
+	}
+	stateAbbrIndex = -1;
+	stateNameIndex = -1;
+}
+
+
+for (var i = 0; i < numfields; i++)
+{
+	document.write("<tr><td><input type=\"text\" id=\"" + namefields[i] + "\" size=\"10\" style=\"text-align: right;\" onfocusout=\"validate(this.id, this.value)\"></td><tr>");
+}
+</script>
+
+</table>
+
+<input type="button" onclick="process()" value="SUBMIT">
+<input type="reset" value="RESET" onclick="reset()">
+
+<p><input type ="text" name="thanksMsg" size="60" style="text-align: right; background-color: #FFFFCC ; border: none" readonly></p>
+
+<table>
+<tr><th>State Abbr</th><th>State</th><th>Capital</th><th>Population</th></tr>
+<script>
+
+ for (var i = 0; i < numfields; i++) {
+ 	document.write("<tr><td><input type =\"text\" name=\"StateAbbr" + i + "\" size=\"10\" style=\"text-align: right;\" readonly></td><td><input type =\"text\" name=\"StateName" + i + "\" size=\"10\" style=\"text-align: right;\" readonly></td><td><input type =\"text\" name=\"Capital" + i + "\" size=\"10\" style=\"text-align: right;\" readonly></td><td><input type=\"text\" name=\"Population" + i + "\" size=\"10\" style=\"text-align: right;\" readonly></td><tr>");
+ }
+
+</script>
+
+</table>
+
+</form>
+<p><a class="button" href="hw5.html">back to Home Work 5 cover page</a></p>
+    </body> 
+</html> 
