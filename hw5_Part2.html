@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+<meta charset="utf-8">
+<meta name="description" content="pulldown menu that can be used as navigation">
+<title>Pulldown Menus as Navigation Element</title>
+
+<script>
+function goToNewPage(myForm) {
+    var myDestination = myForm.destinationList.options[myForm.destinationList.selectedIndex].value;
+    window.location = myDestination;
+}
+</script>
+
+<style>
+body { width:500px;
+       margin: 0px auto; padding: 15px;
+       text-align: left; /* Counteract to IE/Win Hack */	
+       background-color:#00ccff;
+      }    
+</style>
+
+</head>
+
+<body>
+<form>
+<h3>Choose your destination (using onChange event handler)</h3>
+<select name="destinationList" onChange="goToNewPage(this.form);">
+<option>Choose Destination:</option>
+<option value="http://www.yahoo.com/">Yahoo</option>
+<option value="http://www.w3.org/">W3C</option>
+<option value="http://www.mozilla.org/">Mozilla</option>
+<option value="http://www.ccsf.edu/cnit">CNIT</option>
+</select>
+</form>
+
+<br><br>
+
+<form>
+<h3>Choose your destination (using onClick event handler)</h3>
+<select name="destinationList">
+<option value="http://www.yahoo.com/">Yahoo</option>
+<option value="http://www.w3.org/">W3C</option>
+<option value="http://www.mozilla.org/">Mozilla</option>
+<option value="http://www.ccsf.edu/cnit">CNIT</option>
+</select>
+<input type="button" value="Go" onClick="goToNewPage(this.form);">
+</form>
+<p><a class="button" href="hw5.html">back to Home Work 5 cover page</a></p>
+</body>
+</html>
