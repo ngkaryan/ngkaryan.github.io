@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+<meta charset="utf-8">
+<meta name="description" content="working with CSS variables specificity and inheritance">
+<title>CSS Variables Assignment</title>
+<style>
+:root { 
+
+	--body-background-color: cyan;
+	--body-color: blue;
+	--h1-background-image: url('ball.png') 0 0 no-repeat;
+	--li-list-style-image: url('ballsmall.png');
+	--a-link: blue;
+	--a-visited: red;
+	--a-hover-background: yellow;
+	--a-hover-color: blue;
+	--a-active-color: blue;
+}
+
+body {
+	background-color: var(--body-background-color);
+	color: var(--body-color);
+ }
+
+h1 { 
+	text-align:center; height: 120px;
+	background: var(--h1-background-image);
+}
+
+li {
+	list-style-image: var(--li-list-style-image);
+}
+
+/* unvisited link */
+a:link {
+  color: var(--a-link);
+}
+
+/* visited link */
+a:visited {
+  color: var(--a-visited);
+}
+
+/* mouse over link */
+a:hover {
+  background: var(--a-hover-background);
+  color: var(--a-hover-color);
+}
+
+/* selected link */
+a:active {
+  color: var(--a-active-color);
+}
+
+
+a { text-decoration: none; }
+</style>
+ <body>
+<h1>ABC Volleyball League</h1>
+<h2>Created for fun and for learning volleyball</h2>
+<ul>
+  <li><a href="index.html">Home</a></li>
+  <li><a href="members.html">Our Members</a></li>
+  <li><a href="https://www.facebook.com">Facebook Page</a></li>
+</ul>
+<p>This is our league page. Hope you enjoy what our <a href="members.html">Members</a> have to offer!</p>
+</body>
+</html>
